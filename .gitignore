@@ -1,2 +1,4 @@
 #ignorar o arquivo funcoes auxiliar
 .funcoes
+#ignorar o dta base
+core/Database.php
