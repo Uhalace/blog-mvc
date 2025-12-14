@@ -15,15 +15,15 @@ class PostModel
         $this->conn = Database::getInstance()->getConnection();
     }
 
-    public function postNoticia(string $titulo, string $conteudo): bool
+    public function postNoticia(string $titulo, string $image, string $conteudo): bool
     {
-        $stmt = $this->conn->prepare("INSERT INTO posts (titulo, conteudo) VALUES (?, ?)");
+        $stmt = $this->conn->prepare("INSERT INTO posts (titulo, image, conteudo) VALUES (?, ?, ?)");
 
         if (!$stmt) {
             throw new Exception("Erro na preparação: " . $this->conn->error);
         }
 
-        $stmt->bind_param("ss", $titulo, $conteudo);
+        $stmt->bind_param("sss", $titulo, $image, $conteudo);
 
         if (!$stmt->execute()) {
             throw new Exception("Erro ao salvar: " . $stmt->error);

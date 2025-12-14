@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/bootstrap.min.css">
+
     <title>Publicar Notícia</title>
 </head>
 <body class="bg-light">
@@ -25,12 +26,20 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <?php endif; ?>
-
-                        <form action="/blog-mvc/public/post/salvar" method="POST">
-                            
+                            <!-- PARA FAZER UPLOAD DE IMAGENS, ADICIONAR O ATRIBUTO enctype="multipart/form-data" NO FORM -->
+                        <form action="/blog-mvc/public/post/salvar" method="POST" enctype="multipart/form-data">
+                            <div class="mb-3 justify-content-center text-center">
+                                <label for="imagem" class="form-label fw-bold">Pré-visualização da Imagem</label><br>
+                                <img  id="preview-img" src="../../public/images/placeholder.png" alt="Pré-visualização da Imagem" class="img-fluid mb-2" style="max-height: 300px; border: 1px solid #ddd; padding: 5px; border-radius: 5px;">
+                            </div>
                             <div class="mb-3">
                                 <label for="titulo" class="form-label fw-bold">Título</label>
                                 <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Digite o título da notícia" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="imagem" class="form-label fw-bold">Imagem</label><br>
+                                <label for="imagem" class="form-label" id="label-img">Selecione uma imagem para a notícia (opcional):</label>
+                                <input style="display: none;" type="file" name="imagem" id="imagem" class="form-control" accept="image/*">
                             </div>
 
                             <div class="mb-3">
@@ -55,6 +64,7 @@
             </div>
         </div>
     </div>
+    <script src="../../public/js/validate.image.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
