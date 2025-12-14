@@ -1,34 +1,162 @@
-# Como criar um blog simples no padrão MVC, básico para iniciantes
-1. Este progeto usa o modelo MVC (Model, View e Controller, sem frimework)
-2. Será um modelo de blog simples, e poderar ser aprimorado por qualquer um
-3. O objetico desse projeto é para estudos e não para fins comerciais, porém caso creia usar para tal modo é de sua total responsabilidade.
-4. O nível de segurança é baixo pois está usando o MD5 para criptogravia, essa hash está em desuso atualmente.
-5. O projeto usará HTML, CSS, JS e PHPOO
-* O projeto simula um frimework
-# As configurações básicas do sistema esta na pasta core:
-* Conteúdo da pasta core:
+# Blog MVC em PHP (Projeto para Aprendizado)
 
-1. Controller padrao
-2. Router (Aquivo de rotas)
-3. Database onde esta a confguração do banco
+Este projeto foi criado com o objetivo de **ensinar os fundamentos do padrão MVC (Model, View e Controller)** utilizando **PHP Orientado a Objetos**, sem o uso de frameworks.
 
-# ATUALMENTE É RECOMENTADO USAR ARQUIVOS .env, o .env deve estar fora da raiz do projeto
+Ele simula o funcionamento básico de um framework MVC, permitindo que iniciantes entendam como a arquitetura funciona internamente.
 
-* Nova atualização no banco
-1. Adição do campo image no banco
-ALTER TABLE `posts` ADD `image` VARCHAR(250) NOT NULL AFTER `titulo`;
+---
 
-# Agora temos os segintes campos
-	1	id Primária	int(11)			Não	Nenhum		AUTO_INCREMENT	
-	2	titulo	varchar(255)	utf8mb4_general_ci		Não	Nenhum			
-	3	image	varchar(250)	utf8mb4_general_ci		Não	Nenhum			
-	4	conteudo	text	utf8mb4_general_ci		Não	Nenhum		
-	5	criado_em	datetime			Sim	current_timestamp()			
-	6	atualizado_em	datetime		Sim	current_timestamp()		ON UPDATE CURRENT_TIMESTAMP()
+## Objetivo do projeto
 
-# Usaremos a constante global para não precisarmos usar ../ para ir entre pontos no diretório
+- Aprender PHP Orientado a Objetos na prática  
+- Entender o padrão MVC sem abstrações externas  
+- Compreender o ciclo completo de uma requisição HTTP  
+- Trabalhar com rotas, controllers, models e views  
+- Servir como base para estudos e futuras melhorias  
+
+⚠️ **Este projeto é apenas para fins educacionais.**  
+Não é recomendado para uso comercial ou em produção.
+
+---
+
+## Tecnologias utilizadas
+
+- PHP (Orientado a Objetos)
+- HTML
+- CSS
+- JavaScript
+- MySQL
+
+---
+
+## Aviso importante sobre segurança
+
+> O nível de segurança deste projeto é **baixo**.
+
+- O sistema utiliza **MD5** para hash de senhas
+- MD5 está **obsoleto** e não deve ser usado em produção
+- A escolha foi mantida **apenas para fins didáticos**
+
+Caso este projeto seja utilizado fora do contexto de estudo, **toda a responsabilidade é do usuário**.
+
+---
+
+## Estrutura do projeto
+
+O projeto segue uma estrutura simples baseada no padrão MVC.
+
+blog-mvc/
+├── app/
+│ ├── controllers/
+│ ├── models/
+│ └── views/
+│
+├── core/
+│ ├── Controller.php
+│ ├── Router.php
+│ └── Database.php
+│
+├── public/
+│ └── index.php
+│
+├── config/
+│ └── config.php
+│
+└── README.md
+
+
+---
+
+## Pasta `core`
+
+A pasta `core` contém os arquivos principais do mini-framework:
+
+- **Controller**  
+  Classe base utilizada por todos os controllers do sistema.
+
+- **Router**  
+  Responsável por definir e gerenciar as rotas da aplicação.
+
+- **Database**  
+  Responsável pela configuração e conexão com o banco de dados.
+
+---
+
+## Configurações do sistema
+
+As configurações básicas do sistema estão centralizadas.
+
+> Atualmente, é **recomendado utilizar arquivos `.env`** para armazenar configurações sensíveis.
+
+O arquivo `.env` **deve ficar fora da raiz do projeto**, por motivos de segurança.
+
+---
+
+## Banco de dados
+
+O projeto utiliza MySQL.
+
+### Atualização da tabela `posts`
+
+Foi adicionada a coluna `image` para armazenamento do caminho da imagem do post.
+
+```sql
+ALTER TABLE `posts`
+ADD `image` VARCHAR(250) NOT NULL AFTER `titulo`;
+
+Estrutura atual da tabela posts
+Campo	Tipo	Nulo	Extra
+id	int(11)	Não	AUTO_INCREMENT (Primary Key)
+titulo	varchar(255)	Não	
+image	varchar(250)	Não	
+conteudo	text	Não	
+criado_em	datetime	Sim	DEFAULT current_timestamp()
+atualizado_em	datetime	Sim	ON UPDATE current_timestamp()
+
+* Constantes globais
+
+Para evitar o uso excessivo de ../ na navegação entre diretórios, o projeto utiliza constantes globais.
+
 define('BASE_URL', '/blog-mvc/public');
 define('APP_URL',  '/blog-mvc/app');
 
-1. Para acessar basta chamar assim 
- BASE_URL  e APP_URL para chamar os arquivos 
+* Utilização
+
+1. Utilize BASE_URL para acessar arquivos públicos. 
+
+2. Utilize APP_URL para acessar arquivos da aplicação
+
+3. Como executar o projeto
+
+4. Clone o repositório
+
+5. Configure o banco de dados MySQL
+
+# Ajuste as credenciais de conexão
+
+1. Aponte o servidor para a pasta public
+
+2. Acesse o projeto pelo navegador
+
+3. Próximos passos sugeridos
+
+# Este projeto pode ser evoluído como exercício:
+
+1. Substituir MD5 por password_hash e password_verify
+
+2. Implementar arquivos .env
+
+3. Melhorar o sistema de rotas
+
+4. Criar camadas de serviço
+
+5. Adicionar validações e filtros de entrada
+
+6. Implementar autenticação mais segura
+
+# Licença
+
+## Este projeto é livre para uso exclusivamente educacional.
+
+## O autor não se responsabiliza por usos fora desse contexto.
+
