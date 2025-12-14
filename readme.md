@@ -31,5 +31,4 @@ define('BASE_URL', '/blog-mvc/public');
 define('APP_URL',  '/blog-mvc/app');
 
 1. Para acessar basta chamar assim 
-* <?= BASE_URL ?>/
-<?= APP_URL ?>
+ BASE_URL  e APP_URL para chamar os arquivos 
