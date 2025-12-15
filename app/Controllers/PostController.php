@@ -97,4 +97,24 @@ class PostController extends Controller
             exit;
         }
     }
+    function exibir(int $id)
+    {
+        try {
+            $postModel = new PostModel();
+            $post = $postModel->exibirNoticia($id);
+
+            if (!$post) {
+                http_response_code(404);
+                echo "Notícia não encontrada.";
+                exit;
+            }
+
+            $this->view("post/exibir", ["post" => $post]);
+
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo "Erro ao carregar a notícia.";
+            exit;
+        }
+    }   
 }

@@ -160,3 +160,14 @@ define('APP_URL',  '/blog-mvc/app');
 
 ## O autor não se responsabiliza por usos fora desse contexto.
 
+* No futuro usaremos assim
+'titulo'
+'conteudo'
+'image'
+'autor' 
+'data_criacao' 
+'categoria' 
+
+* Alteração
+ALTER TABLE usuarios 
+MODIFY senha VARCHAR(255) NOT NULL;

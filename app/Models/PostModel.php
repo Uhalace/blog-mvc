@@ -33,4 +33,25 @@ class PostModel
 
         return true;
     }
+    public function exibirNoticia(int $id): ?array
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM posts WHERE id = ?");
+
+        if (!$stmt) {
+            throw new Exception("Erro na preparação: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("i", $id);
+
+        if (!$stmt->execute()) {
+            throw new Exception("Erro ao buscar: " . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+        $post = $result->fetch_assoc();
+
+        $stmt->close();
+
+        return $post ?: null;
+    }
 }
