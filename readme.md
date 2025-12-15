@@ -45,6 +45,7 @@ Caso este projeto seja utilizado fora do contexto de estudo, **toda a responsabi
 
 O projeto segue uma estrutura simples baseada no padrão MVC.
 
+```
 blog-mvc/
 ├── app/
 │ ├── controllers/
@@ -63,6 +64,7 @@ blog-mvc/
 │ └── config.php
 │
 └── README.md
+```
 
 
 ---
@@ -112,6 +114,7 @@ image	varchar(250)	Não
 conteudo	text	Não	
 criado_em	datetime	Sim	DEFAULT current_timestamp()
 atualizado_em	datetime	Sim	ON UPDATE current_timestamp()
+
 
 * Constantes globais
 
@@ -171,3 +174,5 @@ define('APP_URL',  '/blog-mvc/app');
 * Alteração
 ALTER TABLE usuarios 
 MODIFY senha VARCHAR(255) NOT NULL;
+
+Auteração da hash para mais segurança
