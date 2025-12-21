@@ -207,7 +207,7 @@ function formatarData($data) {
 
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active fw-semibold" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link active fw-semibold" href="/blog-mvc/">Home</a></li>
                 <li class="nav-item"><a class="nav-link fw-semibold" href="#">Tecnologia</a></li>
                 <li class="nav-item"><a class="nav-link fw-semibold" href="#">Carreira</a></li>
                 <li class="nav-item ms-lg-3">
@@ -285,9 +285,10 @@ function formatarData($data) {
                     
                     <hr class="mb-4 opacity-25">
 
-                    <p class="text-body" style="text-align: justify;">
-                        <?= nl2br(htmlspecialchars($post['conteudo'])) ?>
-                    </p>
+                    <div class="article-content" style="text-align: justify;">
+                         <?= html_entity_decode($post['conteudo'], ENT_QUOTES | ENT_HTML5, 'UTF-8') ?>
+                    </div>
+
                     <hr class="my-4 opacity-25">
                     <div class="mt-5 p-4 bg-light rounded-3 d-flex align-items-start border">
                         <div class="flex-shrink-0">

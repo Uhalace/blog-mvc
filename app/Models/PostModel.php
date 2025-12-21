@@ -8,7 +8,7 @@ require_once __DIR__ . "/../../core/Database.php";
 
 class PostModel
 {
-    private $conn;
+    private mysqli $conn;
 
     public function __construct()
     {
@@ -46,12 +46,27 @@ class PostModel
         if (!$stmt->execute()) {
             throw new Exception("Erro ao buscar: " . $stmt->error);
         }
+        
 
         $result = $stmt->get_result();
         $post = $result->fetch_assoc();
-
+      
         $stmt->close();
-
+        /*
+        @Uhalace:
+        Auteração para atualizar avisualização da noticia
+        sempre adicionao 1 a mais
+        */
+        if ($post) {
+            //atualizando a visualização
+            $updateStmt = $this->conn->prepare("UPDATE posts SET visualizacao = visualizacao + 1 WHERE id = ?");
+            $updateStmt->bind_param("i", $id);
+            $updateStmt->execute();
+            $updateStmt->close();
+            if(isset($post['visualizacao'])){
+                $post['visualizacao'] ++;
+            }       
+        }
         return $post ?: null;
     }
 }

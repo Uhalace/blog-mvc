@@ -1,2 +1,4 @@
 RewriteEngine On
 RewriteRule ^$ public/ [L]
+# Redireciona tudo o que for digitado para a pasta public/
+    RewriteRule ^(.*)$ public/$1 [L]

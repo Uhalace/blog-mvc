@@ -176,3 +176,9 @@ ALTER TABLE usuarios
 MODIFY senha VARCHAR(255) NOT NULL;
 
 Auteração da hash para mais segurança
+
+#auterações 21/12/2025
+Auteração no esquema de tabela adição de coluna 
+ALTER TABLE `posts` ADD `visualizacao` INT NOT NULL DEFAULT '0' AFTER `conteudo`;
+Adição de middlewere para verificação de login para areas restritras 
+Adicionando o tinymce para melhorar a area de publicação

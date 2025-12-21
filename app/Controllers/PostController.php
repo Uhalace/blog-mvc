@@ -2,12 +2,16 @@
 
 require_once __DIR__ . "/../../core/Controller.php";
 require_once __DIR__ . "/../../app/Models/PostModel.php";
-
+require_once __DIR__ . "/../../app/Middlewares/Autenticacao.php";
+use  \App\Middlewares\Autenticacao;
 class PostController extends Controller
 {
+
     public function criar()
     {
-        session_start();
+        //veridicando se esta logado
+       Autenticacao::verificar();
+        
         $mensagem = $_SESSION['mensagem'] ?? null;
         unset($_SESSION['mensagem']);
 

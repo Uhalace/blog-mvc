@@ -1,7 +1,9 @@
 <?php
+session_start();
 
 
 if (!defined('BASE_URL')) define('BASE_URL', '/blog-mvc/public');
+
 ?>
 
 <!DOCTYPE html>
@@ -214,6 +216,10 @@ if (!defined('BASE_URL')) define('BASE_URL', '/blog-mvc/public');
                 <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Notícias</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
+                <?php if (isset($_SESSION['usuario'])): ?>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>/user/logout">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo BASE_URL; ?>/post/criar">Publicar</a></li>
+                <?php endif; ?>
                 <li class="nav-item ms-lg-2">
                     <a href="<?php echo BASE_URL; ?>/user/login" class="btn btn-primary btn-sm rounded-pill px-4">Login</a>
                 </li>
@@ -232,7 +238,7 @@ if (!defined('BASE_URL')) define('BASE_URL', '/blog-mvc/public');
 
         <div class="search-wrapper">
             <form action="#" method="GET">
-                <input type="text" class="form-control search-input" placeholder="O que você quer aprender hoje?">
+                <input type="text" class="form-control search-input" placeholder="O que você quer ler hoje?" name="q">
                 <button type="submit" class="btn btn-primary search-btn"><i class="bi bi-search"></i></button>
             </form>
         </div>
@@ -282,7 +288,8 @@ if (!defined('BASE_URL')) define('BASE_URL', '/blog-mvc/public');
                 : "https://placehold.co/600x400/eee/31343C?text=Blog+MVC";
                 
             $categoria = htmlspecialchars($row['categoria'] ?? 'Geral');
-            $link = "/blog-mvc/public/post/exibir/" . $row['id'];
+            $link = "/blog-mvc/post/exibir/" . $row['id'];
+            $visualizacoes = (int)$row['visualizacao'];
         ?>
         
         <div class="col-md-6 col-lg-4">
@@ -304,9 +311,10 @@ if (!defined('BASE_URL')) define('BASE_URL', '/blog-mvc/public');
                     </p>
 
                     <div class="card-footer-custom">
-                        <div class="d-flex align-items-center gap-2">
+                        <div class="d-flex align-items-center gap-2 text-dark">
                             <i class="bi bi-calendar3"></i>
                             <small><?= $postado_em ?></small>
+                            <small class="ms-3 text-dark"><i class="bi bi-eye"></i> <?= $visualizacoes ?> </small>
                         </div>
                         <span class="read-more-btn">
                             Ler mais <i class="bi bi-arrow-right ms-1"></i>
