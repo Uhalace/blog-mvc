@@ -103,7 +103,7 @@ Recomenda-se o uso de .env (opcional neste projeto)
 
 Nunca armazene .env dentro da pasta pública
 
-Indicado apenas para ambiente de desenvolvimento
+Indicado apenas para ambiente de desenvolvimento```
 
 🌐 Constantes Globais
 php
