@@ -37,73 +37,7 @@ Não é recomendado para uso comercial ou em produção.
 ### 🔑 Hash de Senhas
 
 O sistema **não utiliza MD5**.
-
-```php
-$hash = password_hash($senha, PASSWORD_DEFAULT);
-Utiliza algoritmo seguro nativo do PHP
-
-Salt embutido automaticamente
-
-Compatível com futuras versões do PHP
-
-🔍 Verificação de Senha
-php
-Copiar código
-password_verify($senhaDigitada, $hashArmazenado);
-🛡 Proteções Implementadas
-Hash seguro de senhas
-
-Prepared Statements (SQL Injection)
-
-Sessão regenerada após login
-
-Mensagens genéricas de erro (anti-enumeração)
-
-CSRF Token no formulário de login
-
-Escape de saída contra XSS nas views
-
-⚠️ Limitações Atuais
-Não possui rate limit
-
-Não força HTTPS
-
-Sessão ainda simples (sem SameSite/HttpOnly configurado manualmente)
-
-Sem logs de auditoria
-
-Sem testes automatizados
-
-📁 Estrutura do Projeto
-graphql
-Copiar código
-blog-mvc/
-├── app/
-│   ├── Controllers/
-│   ├── Models/
-│   ├── Middlewares/
-│   └── Views/
-│
-├── core/
-│   ├── Controller.php   # Classe base dos controllers
-│   ├── Router.php       # Sistema de rotas (Apache)
-│   └── Database.php     # Conexão com MySQL
-│
-├── public/
-│   └── index.php        # Entry-point para Apache/XAMPP
-│
-├── server.php           # Roteador para PHP Built-in Server
-│
-├── config/
-│   └── config.php
-│
-└── README.md
-🔧 Configurações
-Recomenda-se o uso de .env (opcional neste projeto)
-
-Nunca armazene .env dentro da pasta pública
-
-### Indicado apenas para ambiente de desenvolvimento
+Indicado apenas para ambiente de desenvolvimento
 
 🌐 Constantes Globais
 php
@@ -200,3 +134,70 @@ core/Router.php → Apache
 Projeto exclusivamente educacional.
 
 O autor não se responsabiliza por usos fora desse contexto.
+
+
+```php
+$hash = password_hash($senha, PASSWORD_DEFAULT);
+Utiliza algoritmo seguro nativo do PHP
+
+Salt embutido automaticamente
+
+Compatível com futuras versões do PHP
+
+🔍 Verificação de Senha
+php
+Copiar código
+password_verify($senhaDigitada, $hashArmazenado);
+🛡 Proteções Implementadas
+Hash seguro de senhas
+
+Prepared Statements (SQL Injection)
+
+Sessão regenerada após login
+
+Mensagens genéricas de erro (anti-enumeração)
+
+CSRF Token no formulário de login
+
+Escape de saída contra XSS nas views
+
+⚠️ Limitações Atuais
+Não possui rate limit
+
+Não força HTTPS
+
+Sessão ainda simples (sem SameSite/HttpOnly configurado manualmente)
+
+Sem logs de auditoria
+
+Sem testes automatizados
+
+📁 Estrutura do Projeto
+graphql
+Copiar código
+blog-mvc/
+├── app/
+│   ├── Controllers/
+│   ├── Models/
+│   ├── Middlewares/
+│   └── Views/
+│
+├── core/
+│   ├── Controller.php   # Classe base dos controllers
+│   ├── Router.php       # Sistema de rotas (Apache)
+│   └── Database.php     # Conexão com MySQL
+│
+├── public/
+│   └── index.php        # Entry-point para Apache/XAMPP
+│
+├── server.php           # Roteador para PHP Built-in Server
+│
+├── config/
+│   └── config.php
+│
+└── README.md
+🔧 Configurações
+Recomenda-se o uso de .env (opcional neste projeto)
+
+Nunca armazene .env dentro da pasta pública
+
