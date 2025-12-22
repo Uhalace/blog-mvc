@@ -152,9 +152,9 @@ Mova a pasta do projeto para dentro de `htdocs` ou `www`. O Apache usará o `pub
 | Data | Alterações |
 | --- | --- |
 | **22/12/2025** | • Compatibilidade total com `php -S` e XAMPP.<br>
-
-<br>• Separação de roteamento (`server.php` vs `Router.php`). |
 | **21/12/2025** | • Adição de contador de visualizações.<br>
+<br>• Separação de roteamento (`server.php` vs `Router.php`). |
+
 
 <br>• Middleware de Login.<br>
 
