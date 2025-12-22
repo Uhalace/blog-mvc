@@ -38,7 +38,7 @@ Não é recomendado para uso comercial ou em produção.
 
 O sistema **não utiliza MD5**.
 
-```php
+php
 $hash = password_hash($senha, PASSWORD_DEFAULT);
 Utiliza algoritmo seguro nativo do PHP
 
