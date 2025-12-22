@@ -20,7 +20,7 @@ class Router {
         $params = array_slice($url, 2);
 
         // Carregar controller
-        $controllerPath = "../app/Controllers/$controllerName.php";
+        $controllerPath = __DIR__ . "/../app/Controllers/$controllerName.php";
 
         if (!file_exists($controllerPath)) {
             die("Controller não encontrado: $controllerName");

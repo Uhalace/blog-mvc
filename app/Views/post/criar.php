@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/css/bootstrap.min.css">
-    <script src="../../js\tinynce/tinymce.min.js"></script>
+    <script src="<?= BASE_URL ?>/public/js/tinynce/tinymce.min.js"></script>
 
     <title>Publicar Notícia</title>
     <style>

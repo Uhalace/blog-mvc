@@ -6,12 +6,12 @@ Ele simula o funcionamento básico de um framework MVC, permitindo que iniciante
 
 ---
 
-## Objetivo do projeto
+## 🎯 Objetivo do Projeto
 
 - Aprender PHP Orientado a Objetos na prática  
 - Entender o padrão MVC sem abstrações externas  
 - Compreender o ciclo completo de uma requisição HTTP  
-- Trabalhar com rotas, controllers, models e views  
+- Trabalhar com rotas, controllers, models, views e middlewares  
 - Servir como base para estudos e futuras melhorias  
 
 ⚠️ **Este projeto é apenas para fins educacionais.**  
@@ -19,166 +19,184 @@ Não é recomendado para uso comercial ou em produção.
 
 ---
 
-## Tecnologias utilizadas
+## 🛠 Tecnologias Utilizadas
 
 - PHP (Orientado a Objetos)
 - HTML
 - CSS
 - JavaScript
 - MySQL
+- Bootstrap (UI)
 
 ---
 
-## Aviso importante sobre segurança
+## 🔐 Aviso Importante sobre Segurança
 
-> O nível de segurança deste projeto é **baixo**.
+> O nível de segurança deste projeto foi **significativamente melhorado**, porém **ainda não é adequado para produção**.
 
-- O sistema utiliza **MD5** para hash de senhas
-- MD5 está **obsoleto** e não deve ser usado em produção
-- A escolha foi mantida **apenas para fins didáticos**
+### 🔑 Hash de Senhas
 
-Caso este projeto seja utilizado fora do contexto de estudo, **toda a responsabilidade é do usuário**.
+O sistema **não utiliza MD5**.
 
----
+```php
+$hash = password_hash($senha, PASSWORD_DEFAULT);
+Utiliza algoritmo seguro nativo do PHP
 
-## Estrutura do projeto
+Salt embutido automaticamente
 
-O projeto segue uma estrutura simples baseada no padrão MVC.
+Compatível com futuras versões do PHP
 
-```
+🔍 Verificação de Senha
+php
+Copiar código
+password_verify($senhaDigitada, $hashArmazenado);
+🛡 Proteções Implementadas
+Hash seguro de senhas
+
+Prepared Statements (SQL Injection)
+
+Sessão regenerada após login
+
+Mensagens genéricas de erro (anti-enumeração)
+
+CSRF Token no formulário de login
+
+Escape de saída contra XSS nas views
+
+⚠️ Limitações Atuais
+Não possui rate limit
+
+Não força HTTPS
+
+Sessão ainda simples (sem SameSite/HttpOnly configurado manualmente)
+
+Sem logs de auditoria
+
+Sem testes automatizados
+
+📁 Estrutura do Projeto
+graphql
+Copiar código
 blog-mvc/
 ├── app/
-│ ├── controllers/
-│ ├── models/
-│ └── views/
+│   ├── Controllers/
+│   ├── Models/
+│   ├── Middlewares/
+│   └── Views/
 │
 ├── core/
-│ ├── Controller.php
-│ ├── Router.php
-│ └── Database.php
+│   ├── Controller.php   # Classe base dos controllers
+│   ├── Router.php       # Sistema de rotas (Apache)
+│   └── Database.php     # Conexão com MySQL
 │
 ├── public/
-│ └── index.php
+│   └── index.php        # Entry-point para Apache/XAMPP
+│
+├── server.php           # Roteador para PHP Built-in Server
 │
 ├── config/
-│ └── config.php
+│   └── config.php
 │
 └── README.md
-```
+🔧 Configurações
+Recomenda-se o uso de .env (opcional neste projeto)
 
+Nunca armazene .env dentro da pasta pública
 
----
+Indicado apenas para ambiente de desenvolvimento
 
-## Pasta `core`
-
-A pasta `core` contém os arquivos principais do mini-framework:
-
-- **Controller**  
-  Classe base utilizada por todos os controllers do sistema.
-
-- **Router**  
-  Responsável por definir e gerenciar as rotas da aplicação.
-
-- **Database**  
-  Responsável pela configuração e conexão com o banco de dados.
-
----
-
-## Configurações do sistema
-
-As configurações básicas do sistema estão centralizadas.
-
-> Atualmente, é **recomendado utilizar arquivos `.env`** para armazenar configurações sensíveis.
-
-O arquivo `.env` **deve ficar fora da raiz do projeto**, por motivos de segurança.
-
----
-
-## Banco de dados
-
-O projeto utiliza MySQL.
-
-### Atualização da tabela `posts`
-
-Foi adicionada a coluna `image` para armazenamento do caminho da imagem do post.
-
-```sql
+🌐 Constantes Globais
+php
+Copiar código
+define('BASE_URL', '/');
+define('APP_URL',  '/app');
+🗄 Banco de Dados
+Tabela posts
+sql
+Copiar código
 ALTER TABLE `posts`
 ADD `image` VARCHAR(250) NOT NULL AFTER `titulo`;
 
-Estrutura atual da tabela posts
-Campo	Tipo	Nulo	Extra
-id	int(11)	Não	AUTO_INCREMENT (Primary Key)
-titulo	varchar(255)	Não	
-image	varchar(250)	Não	
-conteudo	text	Não	
-criado_em	datetime	Sim	DEFAULT current_timestamp()
-atualizado_em	datetime	Sim	ON UPDATE current_timestamp()
-
-
-* Constantes globais
-
-Para evitar o uso excessivo de ../ na navegação entre diretórios, o projeto utiliza constantes globais.
-
-define('BASE_URL', '/blog-mvc/public');
-define('APP_URL',  '/blog-mvc/app');
-
-* Utilização
-
-1. Utilize BASE_URL para acessar arquivos públicos. 
-
-2. Utilize APP_URL para acessar arquivos da aplicação
-
-3. Como executar o projeto
-
-4. Clone o repositório
-
-5. Configure o banco de dados MySQL
-
-# Ajuste as credenciais de conexão
-
-1. Aponte o servidor para a pasta public
-
-2. Acesse o projeto pelo navegador
-
-3. Próximos passos sugeridos
-
-# Este projeto pode ser evoluído como exercício:
-
-1. Substituir MD5 por password_hash e password_verify
-
-2. Implementar arquivos .env
-
-3. Melhorar o sistema de rotas
-
-4. Criar camadas de serviço
-
-5. Adicionar validações e filtros de entrada
-
-6. Implementar autenticação mais segura
-
-# Licença
-
-## Este projeto é livre para uso exclusivamente educacional.
-
-## O autor não se responsabiliza por usos fora desse contexto.
-
-* No futuro usaremos assim
-'titulo'
-'conteudo'
-'image'
-'autor' 
-'data_criacao' 
-'categoria' 
-
-* Alteração
+ALTER TABLE `posts`
+ADD `visualizacao` INT NOT NULL DEFAULT 0 AFTER `conteudo`;
+Tabela usuarios
+sql
+Copiar código
 ALTER TABLE usuarios 
 MODIFY senha VARCHAR(255) NOT NULL;
 
-Auteração da hash para mais segurança
+ALTER TABLE usuarios
+ADD ativo TINYINT(1) NOT NULL DEFAULT 1;
+▶️ Como Executar o Projeto
+1️⃣ Clonar o Repositório
+bash
+Copiar código
+git clone https://github.com/Uhalace/blog-mvc
+cd blog-mvc
+2️⃣ Configurar o Banco de Dados
+Crie o banco MySQL
 
-#auterações 21/12/2025
-Auteração no esquema de tabela adição de coluna 
-ALTER TABLE `posts` ADD `visualizacao` INT NOT NULL DEFAULT '0' AFTER `conteudo`;
-Adição de middlewere para verificação de login para areas restritras 
-Adicionando o tinymce para melhorar a area de publicação
+Ajuste as credenciais em config/config.php
+
+Execute os comandos SQL necessários
+
+3️⃣ Escolha o Método de Execução
+🅰️ Opção A — Servidor Embutido do PHP
+Utiliza o arquivo server.php para roteamento:
+
+bash
+Copiar código
+php -S localhost:8080 server.php
+Acesse:
+
+arduino
+Copiar código
+http://localhost:8080
+🅱️ Opção B — Apache (XAMPP / WAMP)
+Mova o projeto para htdocs
+
+O Apache direciona para public/index.php
+
+O roteamento é tratado por core/Router.php
+
+Acesse:
+
+arduino
+Copiar código
+http://localhost/blog-mvc/
+🚀 Próximos Passos Sugeridos
+Implementar .env
+
+Rate limit no login
+
+Middleware de permissões
+
+CSRF global
+
+Validação centralizada
+
+Logs de segurança
+
+Testes automatizados
+
+🕒 Histórico de Alterações
+📅 21/12/2025
+Adição da coluna visualizacao
+
+Middleware de login
+
+Integração do TinyMCE
+
+📅 22/12/2025
+Compatibilidade total com php -S e XAMPP
+
+Separação de roteamento:
+
+server.php → PHP Built-in
+
+core/Router.php → Apache
+
+📄 Licença
+Projeto exclusivamente educacional.
+
+O autor não se responsabiliza por usos fora desse contexto.

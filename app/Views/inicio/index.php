@@ -1,9 +1,17 @@
 <?php
 session_start();
 
-
-if (!defined('BASE_URL')) define('BASE_URL', '/blog-mvc/public');
-
+// Lógica para definir a BASE_URL automaticamente
+if (!defined('BASE_URL')) {
+    // Verifica se está rodando no servidor embutido (php -S)
+    if (php_sapi_name() === 'cli-server') {
+        // No servidor embutido, a raiz é direta, pois usamos o router
+        define('BASE_URL', '/'); 
+    } else {
+        // No XAMPP (Apache padrão), precisamos indicar a subpasta
+        define('BASE_URL', '/blog-mvc');
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -288,7 +296,7 @@ if (!defined('BASE_URL')) define('BASE_URL', '/blog-mvc/public');
                 : "https://placehold.co/600x400/eee/31343C?text=Blog+MVC";
                 
             $categoria = htmlspecialchars($row['categoria'] ?? 'Geral');
-            $link = "/blog-mvc/post/exibir/" . $row['id'];
+            $link = BASE_URL . "/post/exibir/" . $row['id'];
             $visualizacoes = (int)$row['visualizacao'];
         ?>
         

@@ -1,6 +1,8 @@
 <?php
 
 
+
+
 function calcularTempoLeitura($texto) {
     $palavras = str_word_count(strip_tags($texto));
     $minutos = floor($palavras / 200);
@@ -26,7 +28,7 @@ function formatarData($data) {
     <meta property="og:type" content="article">
     <meta property="og:title" content="<?= isset($post) ? htmlspecialchars($post['titulo']) : 'Blog MVC' ?>">
     <meta property="og:description" content="<?= isset($post) ? substr(htmlspecialchars(strip_tags($post['conteudo'])), 0, 160) : '' ?>">
-    <meta property="og:image" content="<?= isset($post) ? '/blog-mvc/public/imagens/posts/' . htmlspecialchars($post['image']) : '' ?>">
+    <meta property="og:image" content="<?= isset($post) ? BASE_URL . '/imagens/posts/' . htmlspecialchars($post['image']) : '' ?>">
     <meta property="og:site_name" content="Blog MVC">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -207,7 +209,7 @@ function formatarData($data) {
 
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active fw-semibold" href="/blog-mvc/">Home</a></li>
+                <li class="nav-item"><a class="nav-link active fw-semibold" href="<?= BASE_URL ?>/inicio">Home</a></li>
                 <li class="nav-item"><a class="nav-link fw-semibold" href="#">Tecnologia</a></li>
                 <li class="nav-item"><a class="nav-link fw-semibold" href="#">Carreira</a></li>
                 <li class="nav-item ms-lg-3">
@@ -265,7 +267,7 @@ function formatarData($data) {
                 <div class="featured-image-container">
                     <?php 
                         $imagePath = isset($post['image']) && !empty($post['image']) 
-                            ? '/blog-mvc/public/imagens/posts/' . htmlspecialchars($post['image']) 
+                            ? BASE_URL .'/imagens/posts/' . htmlspecialchars($post['image']) 
                             : 'https://placehold.co/800x400/eee/31343C?text=Blog+MVC'; //caso não tenha imagem
                     ?>
                     <img src="<?= $imagePath ?>" alt="<?= htmlspecialchars($post['titulo']) ?>" class="featured-image">

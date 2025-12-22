@@ -1,8 +1,8 @@
 <?php
-// URL base da aplicação
-define('BASE_URL', '/blog-mvc');
-define('APP_URL',  '/blog-mvc/app');
-require "../core/Router.php";
+require_once __DIR__ . '/../config/config.php';
+require __DIR__ . '/../core/Router.php';
 
 $router = new Router();
 $router->run();
+
+
