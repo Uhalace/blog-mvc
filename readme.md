@@ -1,4 +1,5 @@
 
+
 # 📘 Blog MVC em PHP (Projeto Educacional)
 
 Este projeto foi criado com o objetivo de **ensinar os fundamentos do padrão MVC (Model, View e Controller)** utilizando **PHP Orientado a Objetos**, sem o uso de frameworks pesados. Ele simula o funcionamento básico de um framework, permitindo que iniciantes entendam a arquitetura interna de uma aplicação web.
@@ -151,9 +152,9 @@ Mova a pasta do projeto para dentro de `htdocs` ou `www`. O Apache usará o `pub
 | Data | Alterações |
 | --- | --- |
 | **22/12/2025** | • Compatibilidade total com `php -S` e XAMPP.<br>
-
-<br>• Separação de roteamento (`server.php` vs `Router.php`). |
 | **21/12/2025** | • Adição de contador de visualizações.<br>
+<br>• Separação de roteamento (`server.php` vs `Router.php`). |
+
 
 <br>• Middleware de Login.<br>
 
