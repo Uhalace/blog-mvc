@@ -1,203 +1,167 @@
-# Blog MVC em PHP (Projeto para Aprendizado)
 
-Este projeto foi criado com o objetivo de **ensinar os fundamentos do padrão MVC (Model, View e Controller)** utilizando **PHP Orientado a Objetos**, sem o uso de frameworks.
 
-Ele simula o funcionamento básico de um framework MVC, permitindo que iniciantes entendam como a arquitetura funciona internamente.
+# 📘 Blog MVC em PHP (Projeto Educacional)
+
+Este projeto foi criado com o objetivo de **ensinar os fundamentos do padrão MVC (Model, View e Controller)** utilizando **PHP Orientado a Objetos**, sem o uso de frameworks pesados. Ele simula o funcionamento básico de um framework, permitindo que iniciantes entendam a arquitetura interna de uma aplicação web.
+
+> ⚠️ **Aviso:** Este projeto é estritamente para **fins educacionais**. Embora possua melhorias de segurança, não é recomendado para uso comercial ou em produção sem auditoria adicional.
 
 ---
 
-## 🎯 Objetivo do Projeto
+## 🎯 Objetivos de Aprendizado
 
-- Aprender PHP Orientado a Objetos na prática  
-- Entender o padrão MVC sem abstrações externas  
-- Compreender o ciclo completo de uma requisição HTTP  
-- Trabalhar com rotas, controllers, models, views e middlewares  
-- Servir como base para estudos e futuras melhorias  
-
-⚠️ **Este projeto é apenas para fins educacionais.**  
-Não é recomendado para uso comercial ou em produção.
+* ✅ Aprender PHP Orientado a Objetos na prática.
+* ✅ Entender o padrão MVC sem abstrações externas (Frameworkless).
+* ✅ Compreender o ciclo completo de uma requisição HTTP.
+* ✅ Trabalhar com Roteamento, Controllers, Models, Views e Middlewares.
 
 ---
 
 ## 🛠 Tecnologias Utilizadas
 
-- PHP (Orientado a Objetos)
-- HTML
-- CSS
-- JavaScript
-- MySQL
-- Bootstrap (UI)
+| Backend | Frontend | Infra/Dados |
+| --- | --- | --- |
+| PHP (OOP) | HTML5 & CSS3 | MySQL |
+| Composer (Opcional) | JavaScript | Apache / PHP Server |
+|  | Bootstrap 5 |  |
 
 ---
 
-## 🔐 Aviso Importante sobre Segurança
+## 📁 Estrutura do Projeto
 
-> O nível de segurança deste projeto foi **significativamente melhorado**, porém **ainda não é adequado para produção**.
-
-### 🔑 Hash de Senhas
-
-O sistema **não utiliza MD5**.
-Indicado apenas para ambiente de desenvolvimento
-
-🌐 Constantes Globais
-php
-Copiar código
-define('BASE_URL', '/');
-define('APP_URL',  '/app');
-🗄 Banco de Dados
-Tabela posts
-sql
-Copiar código
-ALTER TABLE `posts`
-ADD `image` VARCHAR(250) NOT NULL AFTER `titulo`;
-
-ALTER TABLE `posts`
-ADD `visualizacao` INT NOT NULL DEFAULT 0 AFTER `conteudo`;
-Tabela usuarios
-sql
-Copiar código
-ALTER TABLE usuarios 
-MODIFY senha VARCHAR(255) NOT NULL;
-
-ALTER TABLE usuarios
-ADD ativo TINYINT(1) NOT NULL DEFAULT 1;
-▶️ Como Executar o Projeto
-1️⃣ Clonar o Repositório
-bash
-Copiar código
-git clone https://github.com/Uhalace/blog-mvc
-cd blog-mvc
-2️⃣ Configurar o Banco de Dados
-Crie o banco MySQL
-
-Ajuste as credenciais em config/config.php
-
-Execute os comandos SQL necessários
-
-3️⃣ Escolha o Método de Execução
-🅰️ Opção A — Servidor Embutido do PHP
-Utiliza o arquivo server.php para roteamento:
-
-bash
-Copiar código
-php -S localhost:8080 server.php
-Acesse:
-
-arduino
-Copiar código
-http://localhost:8080
-🅱️ Opção B — Apache (XAMPP / WAMP)
-Mova o projeto para htdocs
-
-O Apache direciona para public/index.php
-
-O roteamento é tratado por core/Router.php
-
-Acesse:
-
-arduino
-Copiar código
-http://localhost/blog-mvc/
-🚀 Próximos Passos Sugeridos
-Implementar .env
-
-Rate limit no login
-
-Middleware de permissões
-
-CSRF global
-
-Validação centralizada
-
-Logs de segurança
-
-Testes automatizados
-
-🕒 Histórico de Alterações
-📅 21/12/2025
-Adição da coluna visualizacao
-
-Middleware de login
-
-Integração do TinyMCE
-
-📅 22/12/2025
-Compatibilidade total com php -S e XAMPP
-
-Separação de roteamento:
-
-server.php → PHP Built-in
-
-core/Router.php → Apache
-
-📄 Licença
-Projeto exclusivamente educacional.
-
-O autor não se responsabiliza por usos fora desse contexto.
-
-
-```php
-$hash = password_hash($senha, PASSWORD_DEFAULT);
-Utiliza algoritmo seguro nativo do PHP
-
-Salt embutido automaticamente
-
-Compatível com futuras versões do PHP
-
-🔍 Verificação de Senha
-php
-Copiar código
-password_verify($senhaDigitada, $hashArmazenado);
-🛡 Proteções Implementadas
-Hash seguro de senhas
-
-Prepared Statements (SQL Injection)
-
-Sessão regenerada após login
-
-Mensagens genéricas de erro (anti-enumeração)
-
-CSRF Token no formulário de login
-
-Escape de saída contra XSS nas views
-
-⚠️ Limitações Atuais
-Não possui rate limit
-
-Não força HTTPS
-
-Sessão ainda simples (sem SameSite/HttpOnly configurado manualmente)
-
-Sem logs de auditoria
-
-Sem testes automatizados
-
-📁 Estrutura do Projeto
-graphql
-Copiar código
+```graphql
 blog-mvc/
 ├── app/
-│   ├── Controllers/
-│   ├── Models/
-│   ├── Middlewares/
-│   └── Views/
+│   ├── Controllers/   # Lógica da aplicação
+│   ├── Models/        # Regras de negócio e acesso ao DB
+│   ├── Middlewares/   # Filtros de requisição (Auth, etc)
+│   └── Views/         # Templates HTML
 │
 ├── core/
-│   ├── Controller.php   # Classe base dos controllers
-│   ├── Router.php       # Sistema de rotas (Apache)
-│   └── Database.php     # Conexão com MySQL
-│
-├── public/
-│   └── index.php        # Entry-point para Apache/XAMPP
-│
-├── server.php           # Roteador para PHP Built-in Server
+│   ├── Controller.php # Classe base dos controllers
+│   ├── Router.php     # Sistema de rotas (Apache)
+│   └── Database.php   # Conexão PDO com MySQL
 │
 ├── config/
-│   └── config.php
+│   └── config.php     # Credenciais e constantes
 │
-└── README.md
-🔧 Configurações
-Recomenda-se o uso de .env (opcional neste projeto)
+├── public/
+│   └── index.php      # Entry-point (Apache/XAMPP)
+│
+└── server.php         # Roteador para PHP Built-in Server
 
-Nunca armazene .env dentro da pasta pública
+```
 
+---
+
+## 🛡 Segurança e Implementações
+
+O nível de segurança foi aprimorado para demonstrar boas práticas modernas.
+
+### 🔑 Autenticação e Senhas
+
+O sistema abandonou o MD5 e utiliza o padrão nativo e seguro do PHP:
+
+* **Hash:** `password_hash($senha, PASSWORD_DEFAULT)` (Bcrypt/Argon2).
+* **Verificação:** `password_verify($senhaDigitada, $hashArmazenado)`.
+* **Vantagens:** Salt automático e proteção contra Rainbow Tables.
+
+### 🛡 Proteções Ativas
+
+* [x] **Prepared Statements:** Prevenção contra SQL Injection em todas as queries.
+* [x] **Regeneração de Sessão:** Prevenção contra *Session Fixation* após login.
+* [x] **Mensagens Genéricas:** Erros de login não revelam se o e-mail existe ou não.
+* [x] **CSRF Token:** Proteção em formulários críticos.
+* [x] **XSS Protection:** Escape de saída nas Views.
+
+---
+
+## ⚙️ Instalação e Configuração
+
+### 1️⃣ Clonar o Repositório
+
+```bash
+git clone https://github.com/Uhalace/blog-mvc
+cd blog-mvc
+
+```
+
+### 2️⃣ Banco de Dados
+
+Crie um banco de dados MySQL e execute as atualizações necessárias nas tabelas:
+
+```sql
+-- Atualização na tabela 'posts'
+ALTER TABLE `posts`
+ADD `image` VARCHAR(250) NOT NULL AFTER `titulo`,
+ADD `visualizacao` INT NOT NULL DEFAULT 0 AFTER `conteudo`;
+
+-- Atualização na tabela 'usuarios'
+ALTER TABLE `usuarios`
+MODIFY `senha` VARCHAR(255) NOT NULL,
+ADD `ativo` TINYINT(1) NOT NULL DEFAULT 1;
+
+```
+
+### 3️⃣ Configuração
+
+Edite o arquivo `config/config.php` (ou crie um `.env` se já implementado) para ajustar as credenciais do banco e a URL base:
+
+```php
+define('BASE_URL', 'http://localhost:8080/'); // Ajuste conforme seu ambiente
+
+```
+
+---
+
+## ▶️ Como Executar
+
+Escolha o método de acordo com seu ambiente de desenvolvimento:
+
+### 🅰️ Opção A — Servidor Embutido do PHP (Recomendado)
+
+Utiliza o arquivo `server.php` para tratar o roteamento corretamente.
+
+```bash
+php -S localhost:8080 server.php
+
+```
+
+👉 Acesse: `http://localhost:8080`
+
+### 🅱️ Opção B — Apache (XAMPP / WAMP)
+
+Mova a pasta do projeto para dentro de `htdocs` ou `www`. O Apache usará o `public/index.php` e o `core/Router.php`.
+
+👉 Acesse: `http://localhost/blog-mvc/`
+
+---
+
+## 🚀 Roadmap e Melhorias Futuras
+
+* [ ] Implementar suporte a variáveis de ambiente (`.env`).
+* [ ] Adicionar Rate Limiting no login (Anti-Brute Force).
+* [ ] Middleware de permissões (ACL).
+* [ ] Validação de dados centralizada.
+* [ ] Logs de auditoria e segurança.
+
+---
+
+## 🕒 Histórico de Alterações (Changelog)
+
+| Data | Alterações |
+| --- | --- |
+| **22/12/2025** | • Compatibilidade total com `php -S` e XAMPP.<br>
+
+<br>• Separação de roteamento (`server.php` vs `Router.php`). |
+| **21/12/2025** | • Adição de contador de visualizações.<br>
+
+<br>• Middleware de Login.<br>
+
+<br>• Integração com editor **TinyMCE**. |
+
+---
+
+## 📄 Licença
+
+Este projeto é **Open Source** para fins de estudo. O autor não se responsabiliza pelo uso indevido do código em ambientes críticos.
